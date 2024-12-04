@@ -5,6 +5,7 @@ using UnityEngine;
 public abstract class Weapon : MonoBehaviour
 {
     public ParticleSystem _muzzleFlash;
+
     [HideInInspector] public int damage;
     [HideInInspector] public string bullet;
     [HideInInspector] public Transform point;

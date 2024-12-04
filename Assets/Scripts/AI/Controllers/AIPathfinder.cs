@@ -95,7 +95,7 @@ public abstract class AIPathfinder : MonoBehaviour
         
         if(_isMove)
         {
-            _rigidbody.velocity = transform.forward * _walkSpeed * Time.fixedDeltaTime;
+            _rigidbody.linearVelocity = transform.forward * _walkSpeed * Time.fixedDeltaTime;
         }
     }
 

@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ShotInAssaultRifle : Weapon
+public sealed class ShotInAssaultRifle : Weapon
 {
     [SerializeField] private Transform _shotPoint;
 
@@ -11,5 +9,13 @@ public class ShotInAssaultRifle : Weapon
         damage = sample.damage;
         bullet = sample.bullet;
         point = _shotPoint;
+    }
+
+    public override void OnShot()
+    {
+        if (_muzzleFlash != null)
+        {
+            _muzzleFlash.Play();
+        }
     }
 }
