@@ -1,27 +1,30 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class SkyboxChanger : MonoBehaviour
+namespace SimpleCumulus.Demo.Scripts.Skybox
 {
-    [SerializeField]
-    private Dropdown _dropdown;
-
-    public Material[] Skyboxes;
-
-    //public void Awake()
-    //{
-    //    _dropdown = GetComponent<Dropdown>();
-    //}
-
-    public void ChangeSkybox()
+    public class SkyboxChanger : MonoBehaviour
     {
-        RenderSettings.skybox = Skyboxes[_dropdown.value];
-        RenderSettings.skybox.SetFloat("_Rotation", 0);
-    }
+        [SerializeField]
+        private Dropdown _dropdown;
 
-    public void NextSkybox()
-    {
-        _dropdown.value = (_dropdown.value < Skyboxes.Length - 1) ? _dropdown.value + 1 : _dropdown.value = 0;
-        ChangeSkybox();
+        public Material[] Skyboxes;
+
+        //public void Awake()
+        //{
+        //    _dropdown = GetComponent<Dropdown>();
+        //}
+
+        public void ChangeSkybox()
+        {
+            RenderSettings.skybox = Skyboxes[_dropdown.value];
+            RenderSettings.skybox.SetFloat("_Rotation", 0);
+        }
+
+        public void NextSkybox()
+        {
+            _dropdown.value = (_dropdown.value < Skyboxes.Length - 1) ? _dropdown.value + 1 : _dropdown.value = 0;
+            ChangeSkybox();
+        }
     }
 }

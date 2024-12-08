@@ -1,5 +1,9 @@
 using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Composites;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
 
 ////TODO: respect cursor lock mode
@@ -17,7 +21,7 @@ using UnityEngine.UI;
 
 ////REVIEW: consider this for inclusion directly in the input system
 
-namespace UnityEngine.InputSystem.UI
+namespace Controllers
 {
     /// <summary>
     /// A component that creates a virtual <see cref="Mouse"/> device and drives its input from gamepad-style inputs. This effectively
@@ -266,7 +270,7 @@ namespace UnityEngine.InputSystem.UI
         /// </summary>
         /// <value>Input for <see cref="Mouse.scroll"/>.</value>
         /// <remarks>
-        /// In case you want to only bind vertical scrolling, simply have a <see cref="Composites.Vector2Composite"/>
+        /// In case you want to only bind vertical scrolling, simply have a <see cref="Vector2Composite"/>
         /// with only <c>Up</c> and <c>Down</c> bound and <c>Left</c> and <c>Right</c> deleted or bound to nothing.
         /// </remarks>
         public InputActionProperty scrollWheelAction

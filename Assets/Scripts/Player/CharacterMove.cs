@@ -19,10 +19,10 @@ namespace Player
         
         private Transform _transform;
 
-        public CharacterMove(EntityView entityView, PlayerAnimationHandler playerAnimationHandler) 
+        public CharacterMove(PlayerEntityView playerEntityView, PlayerAnimationHandler playerAnimationHandler) 
         {
-            _controller = entityView.CharacterController;
-            _transform = entityView.Transform;
+            _controller = playerEntityView.CharacterController;
+            _transform = playerEntityView.Transform;
             _playerAnimation = playerAnimationHandler;
             
             Gamepad a = Gamepad.current;

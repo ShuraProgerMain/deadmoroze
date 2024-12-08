@@ -1,7 +1,9 @@
 using System.Collections.Generic;
-using SalvationOfSouls.Core.Interfaces;
+using SalvationOfSouls.DeadMoroze.Runtime.Core.Interfaces;
+using SalvationOfSouls.DeadMoroze.Runtime.IO;
 using SalvationOfSouls.IO;
 using UnityEngine;
+using Weapon;
 using PlayerInput = SalvationOfSouls.IO.PlayerInput;
 
 namespace Player
@@ -12,25 +14,25 @@ namespace Player
         private readonly CharacterShot _characterShot;
         private readonly CharacterMove _characterMove;
         private readonly PlayerAnimationHandler _playerAnimationHandler;
-        private readonly EntityView _entityView;
+        private readonly PlayerEntityView _playerEntityView;
 
         private readonly InputComponent _inputComponent;
         private readonly PlayerInput _playerInput;
 
-        public PlayerEntity(InputComponent inputComponent, EntityView entityView,
+        public PlayerEntity(InputComponent inputComponent, PlayerEntityView playerEntityView,
             IReadOnlyList<WeaponSample> sampleWeapons, 
             IReadOnlyList<GameObject> weaponObjects)
         {
             _inputComponent = inputComponent;
-            _entityView = entityView;
-            _playerAnimationHandler = new PlayerAnimationHandler(entityView.Animator);
+            _playerEntityView = playerEntityView;
+            _playerAnimationHandler = new PlayerAnimationHandler(playerEntityView.Animator);
             
             _playerInput = inputComponent.PlayerInput;
             
             _characterShot = new CharacterShot(_playerAnimationHandler);
             _weaponSelect = new WeaponSelect(_inputComponent, _characterShot, sampleWeapons, weaponObjects);
 
-            _characterMove = new CharacterMove(_entityView, _playerAnimationHandler);
+            _characterMove = new CharacterMove(_playerEntityView, _playerAnimationHandler);
 
             _playerInput.PlayerActions.Shoot.performed += _ => _characterShot.OnShot();
             _playerInput.PlayerActions.Shoot.canceled += _ => _characterShot.OnStopShoot();

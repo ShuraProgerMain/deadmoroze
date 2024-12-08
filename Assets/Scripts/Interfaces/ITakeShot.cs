@@ -1,8 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public interface ITakeShot
+namespace Interfaces
 {
-    public void OnShot();
+    public interface ITakeShot
+    {
+        public void OnShot();
+    }
 }

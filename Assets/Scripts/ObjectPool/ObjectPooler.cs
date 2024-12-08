@@ -1,73 +1,75 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPooler : MonoBehaviour
+namespace ObjectPool
 {
-    [System.Serializable]
-    public class Pool
+    public class ObjectPooler : MonoBehaviour
     {
-        public string tag;
-        public GameObject prefab;
-        public int size;
-    }
-
-    public static ObjectPooler init;
-
-    public List<Pool> pools;
-    public Dictionary<string, Queue<GameObject>> poolDictionary;
-
-    private void Awake() 
-    {
-        if(!init)
+        [System.Serializable]
+        public class Pool
         {
-            init = this;
-        }
-        else
-        {
-            Destroy(gameObject);
+            public string tag;
+            public GameObject prefab;
+            public int size;
         }
 
-        poolDictionary = new Dictionary<string, Queue<GameObject>>();
+        public static ObjectPooler init;
 
-        foreach(Pool pool in pools)
+        public List<Pool> pools;
+        public Dictionary<string, Queue<GameObject>> poolDictionary;
+
+        private void Awake() 
         {
-            Queue<GameObject> objectPool = new Queue<GameObject>();
-
-            for(int i = 0; i < pool.size; i++)
+            if(!init)
             {
-                GameObject obj = Instantiate(pool.prefab);
-                obj.SetActive(false);
-                objectPool.Enqueue(obj);
-
+                init = this;
+            }
+            else
+            {
+                Destroy(gameObject);
             }
 
-            poolDictionary.Add(pool.tag, objectPool);
+            poolDictionary = new Dictionary<string, Queue<GameObject>>();
+
+            foreach(Pool pool in pools)
+            {
+                Queue<GameObject> objectPool = new Queue<GameObject>();
+
+                for(int i = 0; i < pool.size; i++)
+                {
+                    GameObject obj = Instantiate(pool.prefab);
+                    obj.SetActive(false);
+                    objectPool.Enqueue(obj);
+
+                }
+
+                poolDictionary.Add(pool.tag, objectPool);
+            }
         }
-    }
 
-    private void Start()
-    {
-        
-    }
-
-    public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
-    {
-        if(!poolDictionary.ContainsKey(tag))
+        private void Start()
         {
-            Debug.LogWarning("Fuck");
-            return null;
+        
         }
 
-        GameObject objectToSpawn = poolDictionary[tag].Dequeue();
+        public GameObject SpawnFromPool(string tag, Vector3 position, Quaternion rotation)
+        {
+            if(!poolDictionary.ContainsKey(tag))
+            {
+                Debug.LogWarning("Fuck");
+                return null;
+            }
 
-        objectToSpawn.transform.position = position;
-        objectToSpawn.transform.rotation = rotation;
-        objectToSpawn.SetActive(true);
+            GameObject objectToSpawn = poolDictionary[tag].Dequeue();
 
-        poolDictionary[tag].Enqueue(objectToSpawn);
+            objectToSpawn.transform.position = position;
+            objectToSpawn.transform.rotation = rotation;
+            objectToSpawn.SetActive(true);
 
-        return objectToSpawn;
+            poolDictionary[tag].Enqueue(objectToSpawn);
 
+            return objectToSpawn;
+
+        }
     }
 }

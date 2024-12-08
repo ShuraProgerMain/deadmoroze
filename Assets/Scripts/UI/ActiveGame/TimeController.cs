@@ -1,44 +1,47 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using Global;
 using TMPro;
+using UnityEngine;
 
-public class TimeController : MonoBehaviour
+namespace UI.ActiveGame
 {
-    [SerializeField] private TextMeshProUGUI _minutesText;
-    [SerializeField] private TextMeshProUGUI _secondsText;
-
-
-    void Start()
+    public class TimeController : MonoBehaviour
     {
-        StartCoroutine(TimeCounter());
-    }
+        [SerializeField] private TextMeshProUGUI _minutesText;
+        [SerializeField] private TextMeshProUGUI _secondsText;
 
-    private IEnumerator TimeCounter()
-    {
-        var seconds = 0;
-        var minutes = 0;
-        while(true)
+
+        void Start()
         {
-            yield return new WaitForSeconds(1f);
-            UpdateUI(minutes, seconds);
+            StartCoroutine(TimeCounter());
+        }
 
-            if((seconds + 1) == 60)
+        private IEnumerator TimeCounter()
+        {
+            var seconds = 0;
+            var minutes = 0;
+            while(true)
             {
-                seconds = 0;
-                minutes++;
-                GlobalInformation.init.UpdateCurrentMinutes(minutes);
-            }
-            else
-            {
-                seconds++;
+                yield return new WaitForSeconds(1f);
+                UpdateUI(minutes, seconds);
+
+                if((seconds + 1) == 60)
+                {
+                    seconds = 0;
+                    minutes++;
+                    GlobalInformation.init.UpdateCurrentMinutes(minutes);
+                }
+                else
+                {
+                    seconds++;
+                }
             }
         }
-    }
 
-    private void UpdateUI(int minutes, int seconds)
-    {
-        _minutesText.text = minutes.ToString();
-        _secondsText.text = ": " + seconds.ToString();
+        private void UpdateUI(int minutes, int seconds)
+        {
+            _minutesText.text = minutes.ToString();
+            _secondsText.text = ": " + seconds.ToString();
+        }
     }
 }

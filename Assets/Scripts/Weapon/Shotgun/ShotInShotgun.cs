@@ -1,22 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
+using Effects;
 using UnityEngine;
 
-public class ShotInShotgun : Weapon
+namespace Weapon.Shotgun
 {
-    [SerializeField] private Transform _shotPoint;
-    [SerializeField] private ShatterCam _shake;
-
-    public override void Initialize(WeaponSample sample)
+    public class ShotInShotgun : Weapon
     {
-        damage = sample.damage;
-        bullet = sample.bullet;
-        point = _shotPoint;
-    }
+        [SerializeField] private Transform _shotPoint;
+        [SerializeField] private ShatterCam _shake;
 
-    public override void OnShot()
-    {
-        base.OnShot();
-        _shake.OnShake();
+        public override void Initialize(WeaponSample sample)
+        {
+            damage = sample.damage;
+            bullet = sample.bullet;
+            point = _shotPoint;
+        }
+
+        public override void OnShot()
+        {
+            base.OnShot();
+            _shake.OnShake();
+        }
     }
 }

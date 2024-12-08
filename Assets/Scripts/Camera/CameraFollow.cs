@@ -1,20 +1,21 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+namespace Camera
 {
-    [SerializeField] private Transform _target;
-    [SerializeField] private float _smoothSpeed = 0.125f;
-    [SerializeField] private Vector3 _offset;
-
-
-    private void LateUpdate()
+    public class CameraFollow : MonoBehaviour
     {
-        Vector3 desirePosition = _target.position + _offset;
-        Vector3 smoothedPosition = Vector3.Lerp(transform.position, desirePosition, _smoothSpeed);
-        transform.position = smoothedPosition;
+        [SerializeField] private Transform _target;
+        [SerializeField] private float _smoothSpeed = 0.125f;
+        [SerializeField] private Vector3 _offset;
 
-        transform.LookAt(_target);
+
+        private void LateUpdate()
+        {
+            Vector3 desirePosition = _target.position + _offset;
+            Vector3 smoothedPosition = Vector3.Lerp(transform.position, desirePosition, _smoothSpeed);
+            transform.position = smoothedPosition;
+
+            transform.LookAt(_target);
+        }
     }
 }

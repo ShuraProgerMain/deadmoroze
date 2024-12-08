@@ -1,8 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDamaged
+namespace Interfaces
 {
-    public void HandleDamage(int damage, Transform point = null);
+    public interface IDamaged
+    {
+        public void HandleDamage(int damage, Transform point = null);
+    }
 }

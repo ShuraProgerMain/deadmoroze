@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
 
-public class SkyboxRotator : MonoBehaviour
+namespace SimpleCumulus.Demo.Scripts.Skybox
 {
-    public float RotationPerSecond = 1;
-    private bool _rotate;
-
-    protected void Update()
+    public class SkyboxRotator : MonoBehaviour
     {
-        if (_rotate) RenderSettings.skybox.SetFloat("_Rotation", Time.time * RotationPerSecond);
-    }
+        public float RotationPerSecond = 1;
+        private bool _rotate;
 
-    public void ToggleSkyboxRotation()
-    {
-        _rotate = !_rotate;
+        protected void Update()
+        {
+            if (_rotate) RenderSettings.skybox.SetFloat("_Rotation", Time.time * RotationPerSecond);
+        }
+
+        public void ToggleSkyboxRotation()
+        {
+            _rotate = !_rotate;
+        }
     }
 }

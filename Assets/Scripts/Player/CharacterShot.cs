@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Threading.Tasks;
-using SalvationOfSouls.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,7 +8,7 @@ namespace Player
     public class CharacterShot
     {
         public float timeDelay;
-        public Weapon activeWeapon;
+        public Weapon.Weapon activeWeapon;
         public AnimationName animationName;
         
         private readonly PlayerAnimationHandler _playerAnimation;

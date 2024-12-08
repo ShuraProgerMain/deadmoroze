@@ -1,26 +1,28 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ShowTime : MonoBehaviour
+namespace Effects
 {
-    [SerializeField] private float _timeDelay = 0.5f;
-    private WaitForSeconds _delay = new WaitForSeconds(0);
-
-    private void OnEnable()
+    public class ShowTime : MonoBehaviour
     {
-        StartCoroutine(DelayEffect());
-    }
+        [SerializeField] private float _timeDelay = 0.5f;
+        private WaitForSeconds _delay = new WaitForSeconds(0);
 
-    private void Awake()
-    {
-        _delay = new WaitForSeconds(_timeDelay);
-    }
+        private void OnEnable()
+        {
+            StartCoroutine(DelayEffect());
+        }
 
-    private IEnumerator DelayEffect()
-    {
-        yield return _delay;
+        private void Awake()
+        {
+            _delay = new WaitForSeconds(_timeDelay);
+        }
 
-        gameObject.SetActive(false);
+        private IEnumerator DelayEffect()
+        {
+            yield return _delay;
+
+            gameObject.SetActive(false);
+        }
     }
 }

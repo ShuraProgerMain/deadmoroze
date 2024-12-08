@@ -1,25 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class CursorDirection : MonoBehaviour
+namespace Controllers
 {
-
-    private void Awake() 
+    public class CursorDirection : MonoBehaviour
     {
-        Cursor.visible = false;
-    }
 
-    private void FixedUpdate()
-    {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-        RaycastHit hit;
-        if(Physics.Raycast(ray, out hit, 1000))
+        private void Awake() 
         {
-            transform.position = new Vector3(hit.point.x, 0.5f, hit.point.z);
+            Cursor.visible = false;
         }
 
-        transform.LookAt(Camera.main.transform.position);
+        private void FixedUpdate()
+        {
+            var ray = UnityEngine.Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            RaycastHit hit;
+            if(Physics.Raycast(ray, out hit, 1000))
+            {
+                transform.position = new Vector3(hit.point.x, 0.5f, hit.point.z);
+            }
+
+            transform.LookAt(UnityEngine.Camera.main.transform.position);
+        }
     }
 }

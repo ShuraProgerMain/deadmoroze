@@ -1,29 +1,32 @@
 using UnityEngine;
 
-public sealed class ShotInAssaultRifle : Weapon
+namespace Weapon.AssaultRifle
 {
-    [SerializeField] private Transform _shotPoint;
-
-    public override void Initialize(WeaponSample sample)
+    public sealed class ShotInAssaultRifle : Weapon
     {
-        damage = sample.damage;
-        bullet = sample.bullet;
-        point = _shotPoint;
-    }
+        [SerializeField] private Transform _shotPoint;
 
-    public override void OnShot()
-    {
-        if (_muzzleFlash != null)
-        { 
-            _muzzleFlash.Play();
-        }
-    }
-
-    public override void OnStopShot()
-    {
-        if (_muzzleFlash != null)
+        public override void Initialize(WeaponSample sample)
         {
-            _muzzleFlash.Stop();
+            damage = sample.damage;
+            bullet = sample.bullet;
+            point = _shotPoint;
+        }
+
+        public override void OnShot()
+        {
+            if (_muzzleFlash != null)
+            { 
+                _muzzleFlash.Play();
+            }
+        }
+
+        public override void OnStopShot()
+        {
+            if (_muzzleFlash != null)
+            {
+                _muzzleFlash.Stop();
+            }
         }
     }
 }
