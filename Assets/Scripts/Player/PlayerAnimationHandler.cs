@@ -1,23 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAnimationHandler : MonoBehaviour
+namespace Player
 {
-    private Animator _animator;
-
-    private void Awake()
+    public sealed class PlayerAnimationHandler
     {
-        _animator = GetComponent<Animator>();
-    }
+        private readonly Animator _animator;
 
-    public void WeaponAnimation(string name)
-    {
-        _animator.SetTrigger(name);
-    }
+        public PlayerAnimationHandler(Animator animator)
+        {
+            _animator = animator;
+        }
 
-    public void PoseAnimation(string name, bool state)
-    {
-        _animator.SetBool(name, state);
+        public void WeaponAnimation(string name)
+        {
+            _animator.SetTrigger(name);
+        }
+
+        public void PoseAnimation(string name, bool state)
+        {
+            _animator.SetBool(name, state);
+        }
     }
 }

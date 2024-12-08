@@ -1,26 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SliderHandler : MonoBehaviour
+namespace UI.ActiveGame
 {
-    [SerializeField] private Slider _healthTreeSlider;
-    [SerializeField] private ChristmasActionHandler _christmasAction;
-
-    private void OnEnable() 
+    public class SliderHandler : MonoBehaviour
     {
-        _christmasAction.CurrentChristmasHealth += UpdateChristmasHealthSlider;
-        _healthTreeSlider.maxValue = _christmasAction.healthTree;
-    }
+        [SerializeField] private Image newHealthBar;
+        
+        [SerializeField] private ChristmasActionHandler _christmasAction;
 
-    private void OnDisable() 
-    {
-        _christmasAction.CurrentChristmasHealth -= UpdateChristmasHealthSlider;
-    }
+        private int _maxHealth;
+        private void OnEnable() 
+        {
+            _christmasAction.CurrentChristmasHealth += UpdateChristmasHealthSlider;
+            _maxHealth = _christmasAction.healthTree;
+        }
 
-    private void UpdateChristmasHealthSlider(int value)
-    {
-        _healthTreeSlider.value =  value;
+        private void OnDisable() 
+        {
+            _christmasAction.CurrentChristmasHealth -= UpdateChristmasHealthSlider;
+        }
+
+        private void UpdateChristmasHealthSlider(int value)
+        {
+            newHealthBar.fillAmount = Mathf.InverseLerp(0, _maxHealth, value);
+        }
     }
 }

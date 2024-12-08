@@ -1,18 +1,34 @@
-using System.Collections;
 using System.Collections.Generic;
+using Player;
+using SalvationOfSouls.IO;
 using UnityEngine;
 
-public class WeaponSelect : MonoBehaviour
+public class WeaponSelect
 {
-    public List<Weapon> _weapon;
-
-    [SerializeField] private CharacterShot _characterShot;
-    [SerializeField] private List<WeaponSample> _sampleWeapons;
-    [SerializeField] private List<GameObject> _weaponObjects;
+    private CharacterShot _characterShot;
+    
+    private readonly IReadOnlyList<WeaponSample> _sampleWeapons; 
+    private readonly IReadOnlyList<GameObject> _weaponObjects;
+    
+    private readonly List<Weapon> _weapon = new();
 
     private int _selectWeapon = 0;
 
-    
+    public WeaponSelect(InputComponent inputComponent,
+        CharacterShot characterShot, 
+        IReadOnlyList<WeaponSample> sampleWeapons, 
+        IReadOnlyList<GameObject> weaponObjects)
+    {
+        _characterShot = characterShot;
+        _sampleWeapons = sampleWeapons;
+        _weaponObjects = weaponObjects;
+
+        inputComponent.PlayerInput.PlayerActions.OneWeapon.performed += _ => ChangeWeaponKeyboard(0);
+        inputComponent.PlayerInput.PlayerActions.TwoWeapon.performed += _ => ChangeWeaponKeyboard(1);
+        inputComponent.PlayerInput.PlayerActions.ChangeWeapon.performed += _ => ChangeWeaponGamepad();
+        
+        Start();
+    }
     
     private void Start() 
     {
@@ -22,15 +38,15 @@ public class WeaponSelect : MonoBehaviour
             _weapon[i].Initialize(_sampleWeapons[i]);
         }
 
-        SelectActiveWealon(0);
+        SelectActiveWealon(1);
     }
 
-    public void ChangeWeaponKeyboard(int i)
+    private void ChangeWeaponKeyboard(int i)
     {
         SelectActiveWealon(i);
     }
 
-    public void ChangeWeaponGamepad()
+    private void ChangeWeaponGamepad()
     {
         _selectWeapon++;
 

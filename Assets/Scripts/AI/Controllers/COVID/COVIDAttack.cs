@@ -1,54 +1,53 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class COVIDAttack : AIAttack
+namespace AI.Controllers.COVID
 {
-    [SerializeField] private LayerMask _layers;
-    private Coroutine _isAttackCoroutine;
-
-    private void OnEnable() 
+    public sealed class COVIDAttack : AIAttack
     {
-        GlobalInformation.init.COVIDMainDamageChange += ChangeDamageValue;
-    }
+        [SerializeField] private LayerMask _layers;
+        private Coroutine _isAttackCoroutine;
 
-    private void OnDisable()
-    {
-        GlobalInformation.init.COVIDMainDamageChange -= ChangeDamageValue;
-    }
-
-    public override void OnAttack()
-    {
-        if(_isAttackCoroutine != null)
+        private void OnEnable() 
         {
-            return;
+            GlobalInformation.init.COVIDMainDamageChange += ChangeDamageValue;
         }
-        else
+
+        private void OnDisable()
         {
+            GlobalInformation.init.COVIDMainDamageChange -= ChangeDamageValue;
+        }
+
+        public override void OnAttack()
+        {
+            if(_isAttackCoroutine != null)
+            {
+                return;
+            }
+
             _isAttackCoroutine = StartCoroutine(AttackUnit(delayAttack));
         }
-    }
 
-    public override IEnumerator AttackUnit(int delay)
-    {
-        while(true)
+        public override IEnumerator AttackUnit(int delay)
         {
-            yield return new WaitForSeconds(delay);
-
-            RaycastHit hit;
-
-            if(Physics.Raycast(transform.position, transform.forward, out hit, 4, _layers))
+            while(true)
             {
-                if(hit.collider.gameObject.layer == 6)
+                yield return new WaitForSeconds(delay);
+
+                RaycastHit hit;
+
+                if(Physics.Raycast(transform.position, transform.forward, out hit, 4, _layers))
                 {
-                    var dmg = hit.collider.GetComponent<IDamaged>();
-
-
-                    if(dmg != null)
+                    if(hit.collider.gameObject.layer == 6)
                     {
-                        dmg.HandleDamage(damage);
-                    }
+                        var dmg = hit.collider.GetComponent<IDamaged>();
 
+
+                        if(dmg != null)
+                        {
+                            dmg.HandleDamage(damage);
+                        }
+                    }
                 }
             }
         }

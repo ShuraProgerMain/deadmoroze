@@ -1,55 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// [RequireComponent(typeof(Rigidbody))]
-
-public enum AnimationName
+namespace Player
 {
-    Walk,
-    ShotShotgun,
-    ShotAssaultRifle
-}
-public class CharacterMove : MonoBehaviour
-{
-    public InputActionAsset _input;
-    [SerializeField] private float _moveSpeed;
-    private Vector3 _moveDirection;
-    private CharacterController _controller;
-    private PlayerAnimationHandler _playerAnimation;
-
-
-    private void Awake() 
+    public enum AnimationName
     {
-        _controller = GetComponent<CharacterController>();
-        _playerAnimation = GetComponent<PlayerAnimationHandler>();
-
-        var a = Gamepad.current;
-        Debug.Log(a);
+        Walk,
+        ShotShotgun,
+        ShotAssaultRifle
     }
 
-    public void MoveCharacter(Vector3 direction)
+    public sealed class CharacterMove
     {
-        var x = direction.x;
-        var y = direction.y;
+        private float _moveSpeed = 5f;
+        private Vector3 _moveDirection;
+        private CharacterController _controller;
+        private PlayerAnimationHandler _playerAnimation;
+        
+        private Transform _transform;
 
-        if(x != 0 || y != 0)
+        public CharacterMove(EntityView entityView, PlayerAnimationHandler playerAnimationHandler) 
         {
-            _playerAnimation.PoseAnimation(AnimationName.Walk.ToString(), true);
+            _controller = entityView.CharacterController;
+            _transform = entityView.Transform;
+            _playerAnimation = playerAnimationHandler;
+            
+            Gamepad a = Gamepad.current;
+            Debug.Log(a);
         }
-        else if(x == 0 && y == 0)
+
+        public void MoveCharacter(Vector3 direction)
         {
-            _playerAnimation.PoseAnimation(AnimationName.Walk.ToString(), false);
+            float x = direction.x;
+            float y = direction.y;
+
+            if (x != 0 || y != 0)
+            {
+                _playerAnimation.PoseAnimation(AnimationName.Walk.ToString(), true);
+            }
+            else if (x == 0 && y == 0)
+            {
+                _playerAnimation.PoseAnimation(AnimationName.Walk.ToString(), false);
+            }
+
+
+            Vector3 move = _transform.right * x + _transform.forward * y;
+            _controller.Move(move * (_moveSpeed * Time.deltaTime));
         }
 
-
-        Vector3 move = transform.right * x + transform.forward * y;
-        _controller.Move(move * _moveSpeed * Time.deltaTime);
-    }
-
-    public void OffsetCharacter()
-    {
-        //shatter effect
+        public void OffsetCharacter()
+        {
+            
+        }
     }
 }

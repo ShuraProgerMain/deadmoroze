@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
@@ -23,4 +21,8 @@ public abstract class Weapon : MonoBehaviour
         ObjectPooler.init.SpawnFromPool(bullet, point.position, point.rotation);
     }
 
+    public virtual void OnStopShot()
+    {
+        
+    }
 }

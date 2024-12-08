@@ -1,49 +1,47 @@
 using System.Collections;
-using System.Collections.Generic;
+using System.Threading.Tasks;
+using SalvationOfSouls.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CharacterShot : MonoBehaviour
+namespace Player
 {
-    public float timeDelay;
-    
-    public Weapon activeWeapon;
-
-    public AnimationName animationName;
-
-    private PlayerAnimationHandler _playerAnimation;
-
-    private bool _weaponIsLoaded = true;
-
-
-    private void Awake()
+    public class CharacterShot
     {
-        _playerAnimation = GetComponent<PlayerAnimationHandler>();
-    }
+        public float timeDelay;
+        public Weapon activeWeapon;
+        public AnimationName animationName;
+        
+        private readonly PlayerAnimationHandler _playerAnimation;
+        
+        private bool _weaponIsLoaded = true;
 
-    public void asd(InputAction.CallbackContext context)
-    {
-        if(context.action.ReadValue<float>() > 0)
+        public CharacterShot(PlayerAnimationHandler playerAnimation)
         {
-            OnShot();
+            _playerAnimation = playerAnimation;
+        }
+
+        public void OnShot()
+        {
+            if(!_weaponIsLoaded) return;
+
+            _weaponIsLoaded = false;
+            activeWeapon.OnShot();
+            _playerAnimation.WeaponAnimation(animationName.ToString());
+            // StartCoroutine(ReloadWeapon(timeDelay));
+            ReloadWeapon(timeDelay).ContinueWith(_ => Debug.Log("Reload completed"));
+        }
+
+        public void OnStopShoot()
+        {
+            activeWeapon.OnStopShot();
+        }
+
+        private async Task ReloadWeapon(float time)
+        {
+            await Awaitable.WaitForSecondsAsync(time);
+
+            _weaponIsLoaded = true;
         }
     }
-
-    public void OnShot()
-    {
-        if(!_weaponIsLoaded) return;
-
-        _weaponIsLoaded = false;
-        activeWeapon.OnShot();
-        _playerAnimation.WeaponAnimation(animationName.ToString());
-        StartCoroutine(ReloadWeapon(timeDelay));
-    }
-
-    private IEnumerator ReloadWeapon(float time)
-    {
-        yield return new WaitForSeconds(time);
-
-        _weaponIsLoaded = true;
-    }
-
 }

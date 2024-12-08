@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class HealthBarHandler : MonoBehaviour
 {
-    // [SerializeField] public float _maxHealth;
     private Renderer _healthBarRenderer;
     private float _currentHealth;
     private float _nextHealthValue;
     private float _lastCorValue;
-    // private float _lastDamage;
 
     private Coroutine _animationHealtBar;
 

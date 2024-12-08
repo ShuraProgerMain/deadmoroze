@@ -83,10 +83,6 @@ public abstract class AIPathfinder : MonoBehaviour
                 RotationFov(_angleRotation);
             }
         }
-
-        
-        
-        
     }
 
     private void FixedUpdate()

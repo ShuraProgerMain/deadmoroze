@@ -14,8 +14,16 @@ public sealed class ShotInAssaultRifle : Weapon
     public override void OnShot()
     {
         if (_muzzleFlash != null)
-        {
+        { 
             _muzzleFlash.Play();
+        }
+    }
+
+    public override void OnStopShot()
+    {
+        if (_muzzleFlash != null)
+        {
+            _muzzleFlash.Stop();
         }
     }
 }
