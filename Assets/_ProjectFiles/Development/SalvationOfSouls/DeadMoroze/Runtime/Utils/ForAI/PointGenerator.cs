@@ -14,12 +14,6 @@ namespace SalvationOfSouls.DeadMoroze.Runtime.Utils.ForAI
 
 		[SerializeField] private List<Vector3> generatedPoints = new();
 
-		private void Start()
-		{
-			GeneratePoints();
-			DrawPoints();
-		}
-
 		[ContextMenu("Generate Points")]
 		private void GeneratePoints()
 		{

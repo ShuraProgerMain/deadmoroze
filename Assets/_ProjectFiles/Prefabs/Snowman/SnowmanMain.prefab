@@ -458,6 +458,7 @@ Transform:
   - {fileID: 6010604200464851171}
   - {fileID: 4185560571372870709}
   - {fileID: 8038948428113627660}
+  - {fileID: 2294770330613009539}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 128.301, z: 0}
 --- !u!95 &7501497786500336621
@@ -520,6 +521,7 @@ MonoBehaviour:
     Transform: {fileID: 8038948426921020960}
     Animator: {fileID: 7501497786500336621}
   Agent: {fileID: 1428318638012557131}
+  RangeAttackParticle: {fileID: 2118637879567041062}
 --- !u!136 &5842565800767284378
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -701,6 +703,73 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4463723163839075236}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1926990633921761750
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8038948426921020960}
+    m_Modifications:
+    - target: {fileID: 389177296778566997, guid: b411ac6716a6b9e4993b1b92755799cb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.452
+      objectReference: {fileID: 0}
+    - target: {fileID: 389177296778566997, guid: b411ac6716a6b9e4993b1b92755799cb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.009
+      objectReference: {fileID: 0}
+    - target: {fileID: 389177296778566997, guid: b411ac6716a6b9e4993b1b92755799cb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.705
+      objectReference: {fileID: 0}
+    - target: {fileID: 389177296778566997, guid: b411ac6716a6b9e4993b1b92755799cb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9576888
+      objectReference: {fileID: 0}
+    - target: {fileID: 389177296778566997, guid: b411ac6716a6b9e4993b1b92755799cb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.10909829
+      objectReference: {fileID: 0}
+    - target: {fileID: 389177296778566997, guid: b411ac6716a6b9e4993b1b92755799cb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.26461512
+      objectReference: {fileID: 0}
+    - target: {fileID: 389177296778566997, guid: b411ac6716a6b9e4993b1b92755799cb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.03014451
+      objectReference: {fileID: 0}
+    - target: {fileID: 389177296778566997, guid: b411ac6716a6b9e4993b1b92755799cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -11.129
+      objectReference: {fileID: 0}
+    - target: {fileID: 389177296778566997, guid: b411ac6716a6b9e4993b1b92755799cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -31.551
+      objectReference: {fileID: 0}
+    - target: {fileID: 389177296778566997, guid: b411ac6716a6b9e4993b1b92755799cb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 6.759
+      objectReference: {fileID: 0}
+    - target: {fileID: 3811808123563968388, guid: b411ac6716a6b9e4993b1b92755799cb, type: 3}
+      propertyPath: m_Name
+      value: COVIDShooting
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b411ac6716a6b9e4993b1b92755799cb, type: 3}
+--- !u!198 &2118637879567041062 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 565450417734849520, guid: b411ac6716a6b9e4993b1b92755799cb, type: 3}
+  m_PrefabInstance: {fileID: 1926990633921761750}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2294770330613009539 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 389177296778566997, guid: b411ac6716a6b9e4993b1b92755799cb, type: 3}
+  m_PrefabInstance: {fileID: 1926990633921761750}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7501497785160084967
 PrefabInstance:
   m_ObjectHideFlags: 0

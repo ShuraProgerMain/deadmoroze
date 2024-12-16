@@ -8,5 +8,6 @@ namespace SalvationOfSouls.DeadMoroze.Runtime.AI.Controllers.COVID
 	{
 		public EntityView EntityView; 
 		public NavMeshAgent Agent;
+		public ParticleSystem RangeAttackParticle;
 	}
 }

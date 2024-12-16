@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using SalvationOfSouls.DeadMoroze.Runtime.AI.Controllers.COVID;
 using SalvationOfSouls.DeadMoroze.Runtime.Core.MovementStuff;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace SalvationOfSouls.DeadMoroze.Runtime.AI.Controllers
 		private Vector3 _destination;
 
 		public EnemyEntityView EnemyEntityView { get; }
+		public float AttackDelay => 1.5f;
 
 		public EnemyController(int id, EnemyEntityView enemyEntityView, MoveWrapper moveWrapper)
 		{
@@ -24,6 +26,7 @@ namespace SalvationOfSouls.DeadMoroze.Runtime.AI.Controllers
 		{
 			_destination = destination;
 			EnemyEntityView.Agent.enabled = true;
+			EnemyEntityView.Agent.destination = destination;
 		}
 
 		public void Release()
@@ -34,6 +37,7 @@ namespace SalvationOfSouls.DeadMoroze.Runtime.AI.Controllers
 		public void Move()
 		{
 			EnemyEntityView.Agent.SetDestination(_destination); 
+			Debug.Log($"{Id} with destination {EnemyEntityView.Agent.destination}");
 		}
 		
 		public void Rotate()
@@ -42,6 +46,11 @@ namespace SalvationOfSouls.DeadMoroze.Runtime.AI.Controllers
 			// 		EnemyEntityView.Agent.velocity.z), 
 			// 	EnemyEntityView.EntityView.Transform.rotation, 
 			// 	1000f * Time.deltaTime);
+		}
+
+		public void Attack()
+		{
+			EnemyEntityView?.RangeAttackParticle.Play();
 		}
 	}
 }

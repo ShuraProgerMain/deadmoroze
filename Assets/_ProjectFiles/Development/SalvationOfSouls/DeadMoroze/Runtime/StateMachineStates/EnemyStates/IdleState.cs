@@ -1,6 +1,7 @@
 using SalvationOfSouls.DeadMoroze.Runtime.AI.Controllers;
 using SalvationOfSouls.DeadMoroze.Runtime.ChristmasTree;
 using SalvationOfSouls.DeadMoroze.Runtime.Core.FiniteStateMachine;
+using UnityEngine;
 
 namespace SalvationOfSouls.DeadMoroze.Runtime.StateMachineStates.EnemyStates
 {
@@ -19,7 +20,7 @@ namespace SalvationOfSouls.DeadMoroze.Runtime.StateMachineStates.EnemyStates
 		
 		public void OnEnter() 
 		{
-			
+			Debug.Log($"OnEnter: {nameof(MoveToPointState)}");
 		}
 
 		public void OnUpdate(float deltaTime)
@@ -38,12 +39,30 @@ namespace SalvationOfSouls.DeadMoroze.Runtime.StateMachineStates.EnemyStates
 
 	internal sealed record CovidsAttackState : IState
 	{
+		private readonly EnemyController _controller;
+		private float _waitingTime;
+
+		public CovidsAttackState(EnemyController controller)
+		{
+			_controller = controller;
+		}
+		
 		public void OnEnter()
 		{
+			Debug.Log($"OnEnter: {nameof(CovidsAttackState)}");
 		}
-
+		
 		public void OnUpdate(float deltaTime)
 		{
+			if (_waitingTime < _controller.AttackDelay)
+			{
+				_waitingTime += deltaTime;
+			}
+			else
+			{
+				_waitingTime = 0;
+				_controller.Attack();
+			}
 		}
 
 		public void OnExit()
